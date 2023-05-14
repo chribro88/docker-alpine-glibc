@@ -1,4 +1,6 @@
-FROM alpine:3.17
+ARG BASE_VERSION=3.17
+
+FROM alpine:${BASE_VERSION}
 
 ENV LANG=C.UTF-8
 
