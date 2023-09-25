@@ -2,13 +2,14 @@ FROM arm64v8/alpine:3.18
 
 ENV LANG=C.UTF-8
 
-# NOTE: Glibc 2.35 package is broken: https://github.com/sgerrand/alpine-pkg-glibc/issues/176, so we stick to 2.34 for now
+# NOTE: Glibc 2.30 https://github.com/sgerrand/alpine-pkg-glibc/issues/126#issuecomment-662211303
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/Rjerk/alpine-pkg-glibc/releases/download" && \
     ALPINE_GLIBC_PACKAGE_VERSION="2.30-r0" && \
     ALPINE_GLIBC_ARCHITECTURES="arm64" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
     apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
     echo \
         "-----BEGIN PUBLIC KEY-----\
