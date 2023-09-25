@@ -25,13 +25,13 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/Rjerk/alpine-pkg-glibc/releases/do
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION-$ALPINE_GLIBC_ARCHITECTURES/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION-$ALPINE_GLIBC_ARCHITECTURES/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION-$ALPINE_GLIBC_ARCHITECTURES/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    mv /etc/nsswitch.conf /etc/nsswitch.conf.bak && \
+    # mv /etc/nsswitch.conf /etc/nsswitch.conf.bak && \
     apk add --no-cache --allow-untrusted \
         "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
     \
-    mv /etc/nsswitch.conf.bak /etc/nsswitch.conf && \
+    # mv /etc/nsswitch.conf.bak /etc/nsswitch.conf && \
     rm "/etc/apk/keys/sgerrand.rsa.pub" && \
     /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 "$LANG" || true && \
     echo "export LANG=$LANG" > /etc/profile.d/locale.sh && \
