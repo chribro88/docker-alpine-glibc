@@ -1,4 +1,4 @@
-FROM arm64v8/alpine:3.18
+FROM alpine:3.18
 
 ENV LANG=C.UTF-8
 
